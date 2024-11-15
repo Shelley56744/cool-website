@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTT 創業情境互動網站</title>
+    <style>
+        body { font-family: SetoFont, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+        .question, .result { margin: 20px 0; }
+        .options button { margin: 5px; }
+    </style>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type=""text/css href="cool.css">
+    <meta http-equiv="refresh" content="url=http://127.0.0.1:5500/cool/cool.html" />
+</head>
+<body>
+
+    <h1>OTT 創業互動情境</h1>
+    <p id="intro">你是一位待在大公司 Detflix，且熱愛傳播領域的剪輯師，多年來也累積一定的人脈與成就，也是挺滋潤ㄉ~
+    不過，好景不常，賴以維生的廣告量流向跨國網路平台，全球新聞業營收持續下滑，進而影響台灣傳播產業市場經。
+    畢竟是大公司，本來你也不在意，但某天公司卻無預警宣布裁員，而你正是其中一員...一夕間，你變得一無所有，但你也不是個廢人！總是不放過任何機會的你，正好看到上次買早餐時跟彩券行拿的名片，心理樂觀地想著：就買一張吧！
+    上天似乎非常眷顧你（但可能是看你可憐），開獎的那個晚上，幸運得主是你！！又在一夜間，你得到一筆扣稅後還有剩一兆元的不意之財🥳！
+    但有了被裁員的經驗後，你明白「不能僅靠單一收入」就能穩定生活，而是需利用「錢滾錢」的方式創造收入。有著足夠資金、堅定初衷，以及商業頭腦的你，發現了影音串流平台的商機，便開始著手進行創業計畫...</p>
+
+    <div class="question" id="question-container">
+        <h2 id="question-text">在資金、資源都充足的情況下，您會想要做出甚麼類型的OTT？</h2>
+        <div class="options">
+            <button onclick="selectOption(1)">❶ 網路服務商：如 KKBOX 集團的 KKTV、中國的『愛奇藝』、美國的『Netflix 與 FOX+』及 LINE TV、ChocoTV（2018/11/20 ChocoTV 走入歷史，以 LINE TV 存續）、LiTV等。</button>
+            <button onclick="selectOption(2)">❷ 電信商：如『中華 Hami Video』、『台哥大 myVideo』、『遠傳 Friday』、『亞太 Gt TV』。</button>
+            <button onclick="selectOption(3)">❸ 內容商/頻道商：『CatchPlay』、『三立Vidol』、『民視四季』、『ELTA』、『中天快點TV』、『Fain TV』。</button>
+            <button onclick="selectOption(4)">❹ 電視：『小米』、『OVO』、『BandOTT』、『RockTek』。</button>
+        </div>
+    </div>
+
+    <div class="result" id="result-container" style="display: none;">
+        <h2>結果</h2>
+        <p id="result-text">您的選擇會決定創業發展！</p>
+    </div>
+
+    <script>
+        const questions = [
+            { //1
+                text: "在資金、資源都充足的情況下，您會想要做出甚麼類型的OTT？",
+                options: [
+                    { text: "❶ 網路服務商：如 KKBOX 集團的 KKTV、中國的『愛奇藝』、美國的『Netflix 與 FOX+』及 LINE TV、ChocoTV（2018/11/20 ChocoTV 走入歷史，以 LINE TV 存續）、LiTV等。", result: "您選擇了網路服務商模式。" },
+                    { text: "❷ 電信商：如『中華 Hami Video』、『台哥大 myVideo』、『遠傳 Friday』、『亞太 Gt TV』。", result: "您選擇了電信商模式。" },
+                    { text: "❸ 內容商/頻道商：『CatchPlay』、『三立Vidol』、『民視四季』、『ELTA』、『中天快點TV』、『Fain TV』。", result: "您選擇了內容商/頻道商模式。" },
+                    { text: "❹ 電視盒：『小米』、『OVO』、『BandOTT』、『RockTek』。", result: "您選擇了電視盒模式。" }
+                ]
+            },
+
+            { //2
+                text: "大佬，請問想結合甚麼內容呢？",
+                options: [
+                    { text: "❶ 音樂", result: "您選擇了音樂內容。" },
+                    { text: "❷ 體育", result: "您選擇了體育內容。" },
+                    { text: "❸ 新聞", result: "您選擇了新聞內容。" },
+                    { text: "❹ 電影", result: "您選擇了電影內容。" },
+                    { text: "❺ 電視", result: "您選擇了電視內容。" },
+                    { text: "❻ 廣播", result: "您選擇了廣播內容。" },
+                    { text: "❼ 動漫", result: "您選擇了動漫內容。" },
+                    { text: "❽ 教育學術", result: "您選擇了教育學術內容。" }
+                ]
+            },
+
+            { //3
+                text: "那您想怎麼經營呢？",
+                options: [
+                    { text: "❶ 我是慈善企業！所以大家都免費，只要看廣告就好。", result: "投資商在茫茫人海之中看到了我的善良，於是廣告成為主要收入來源，我的平台變成廣告隨選模式（AVOD），收入漸增後我開始擴大公司規模，目前員工數10人。" },
+                    { text: "❷ 我習慣了老東家的收費方法，單人一個月 369 元，並推出優惠家庭方案 1500 元。", result: "因為便宜的月租方案，很多人從 NETFLY、Dethreeney+ 跳槽來這，我的平台成為訂閱隨選模式（SVOD），且我也開始擴大公司規模，目前員工數 10 人，是個不錯的小公司。" },
+                    { text: "❸ 我希望大家可以按照自己的喜好選片觀看，看多少付多少。", result: "半年只有兩小時玩手機機會的重考生非常喜歡我的收費方案，我的平台成為按次付費模式（TVOD）。漸漸，我開始擴大公司規模，目前員工數 10 人，是個不錯的小公司。" },
+                    { text: "❹ 我想當慈善企業又受不了金錢的誘惑，所以讓觀眾可以利用看廣告解鎖內容，或是升級成訂閱會員免看廣告。", result: "我同時照顧到極度沒耐心和超級小氣鬼的客群，所以大家都很喜歡我的 AVOD 混合 SVOD 的雙重經營模式！漸漸，我擴大公司規模，目前員工數 10 人，是個不錯的小公司。" }
+                ]
+            },
+
+            { //4
+                text: "接下來，您想要如何取得內容來源呢？",
+                options: [
+                    { text: "❶ 自己製作作品。", result: "您選擇了自己做。"},
+                    { text: "❷ 買下他人作品的版權。", result: "您選擇了買別人的。"},
+                    { text: "❸ 和相關產業品牌獨家合作。", result: "您選擇了合作。", skipToQuestion: 5}
+                ]
+
+            },
+
+            { //4
+                text: "太多廠商（a.k.a.金主爸媽）想找您投資，但在這詐騙、不實資訊猖狂盛行的時代，您因為一時貪念看到低成本、高報酬、有系統性架構的企劃案，也確定非柬埔寨詐騙的廠商提案後，果斷接受投資，結果被•騙•了，銀行帳戶剩十萬的那種。在窘迫的情況下，失去了一筆錢，你會...",
+                options: [
+                    { text: "❶ 裁員，你變成僅剩三人的迷你公司。", result: "您選擇了裁員。", skipToQuestion: 6},
+                    { text: "❷ 調降員工薪資，使其中一人需要跑外送補貼家計", result: "您選擇了調降薪資。"},
+                    { text: "❸ 放棄製作(購買)這季新作品", result: "您選擇了放棄。對，現在放棄就結束了。", isEnd: true}
+                ]
+            },
+
+            { //5
+                text: "近日，你的公司每況愈下，用戶發現平臺的演算法很爛，一直推給他他沒有興趣的東西，使用者數量逐漸下降，為了改善這個狀況，你會⋯",
+                options: [
+                    { text: "❶ 用戶就應該均衡攝取，不管他喜不喜歡都推給他就對了。", result: "大家發現 NETFLY、Dethreeney+ 的推送機制更符合他們的喜好，紛紛拋棄你的平台走人了。", isEnd: true},
+                    { text: "❷ 購買「小白機」資料庫，配合用戶喜好提供個人化資訊，同時減少自行分析的成本。", result: "你用非法的管道取得個資，傳票已經在你家門口了！", isEnd: true},
+                    { text: "❸ 透過建立會員機制蒐集個人化資訊，精準行銷。", result: "過去的使用者漸漸回鍋，順帶吸引一些新會員加入，你的平台起死回生啦（撒花）~"}
+                ]
+            },
+
+            { //6
+                text: "雖然情況逐漸好轉，但現有的客群已經無法滿足你的事業心，為了有效率地宣傳你的OTT平台，你會⋯",
+                options: [
+                    { text: "❶ 土法煉鋼，瘋狂估狗自己的OTT，讓搜尋結果往前排。", result: "雖然流量刷起來了，你卻也筋疲力盡，不眠不休的生活讓你得鬱血性心衰竭，必須退休養病了。", isEnd: true},
+                    { text: "❷ 招募小編，並在多個社群媒體上註冊及發布相關特色貼文宣傳。", result: "你選擇了招募小編。"},
+                    { text: "❸ 找有潛力的小網紅業配，盡可能壓低獲得曝光率的成本，並且要求他們的廣告詞要越誇大越好。", result: "你選擇了找小網紅業配。"}
+                ]
+            },
+
+            { //8
+                text: "為了讓用戶有更好的觀影體驗，你決定砸下重本⋯",
+                options: [
+                    { text: "❶ 找國內最強傳輸網路業者合作，並駭進其他業者的系統使其癱瘓，這樣就萬無一失了。", result: "但最後被發現，所以被抓去關了。", isEnd: true},
+                    { text: "❷ 自己開發超強網路和超大寬頻流量，並放炸彈把別家網路的基地台炸毀。", result: "但最後被發現，所以被抓去關了。", isEnd: true},
+                    { text: "❸ 與有線電視多系統營運商合作，利用寬頻網路加 OTT TV 機上盒等優惠，吸引用戶購買", result: "有著商業頭腦的你，變成了個大富翁，再也不怕沒錢。", isEnd: true}
+                ]
+            },
+
+        ];
+
+        let currentQuestion = 0;
+
+function selectOption(optionIndex) {
+    const option = questions[currentQuestion].options[optionIndex - 1];
+    document.getElementById("result-text").textContent = option.result;
+    document.getElementById("result-container").style.display = "block";
+
+    if (option.isEnd) {
+        endGame();
+        return;
+    }
+
+    currentQuestion = option.skipToQuestion !== undefined ? option.skipToQuestion : currentQuestion + 1;
+
+    if (currentQuestion < questions.length) {
+        setTimeout(showNextQuestion, 2000);
+    } else {
+        endGame();
+    }
+}
+
+function showNextQuestion() {
+    if (currentQuestion >= questions.length) {
+                endGame();
+                return;
+            }
+
+            const question = questions[currentQuestion];
+            document.getElementById("result-container").style.display = "none";
+            document.getElementById("question-text").textContent = question.text;
+
+            const options = document.querySelector(".options");
+            options.innerHTML = "";
+            question.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.textContent = option.text;
+                button.onclick = () => selectOption(index + 1);
+                options.appendChild(button);
+            });
+
+            // 隱藏描述文字除了在第一頁
+            document.getElementById("intro").style.display = currentQuestion === 0 ? "block" : "none";
+        }
+
+function endGame() {
+    document.getElementById("question-container").style.display = "none";
+    document.getElementById("result-text").textContent += " 遊戲結束，歡迎重生！";
+
+    let restartButton = document.getElementById("restart-button");
+    if (!restartButton) {
+        restartButton = document.createElement("button");
+        restartButton.id = "restart-button";
+        restartButton.textContent = "重生";
+        restartButton.onclick = restartGame;
+        document.getElementById("result-container").appendChild(restartButton);
+    }
+    // 顯示重生按鈕
+    restartButton.style.display = "block";
+}
+
+function restartGame() {
+    // 隱藏重生按鈕
+    document.getElementById("restart-button").style.display = "none";
+    
+    // 重置遊戲狀態
+    currentQuestion = 0;
+    document.getElementById("result-container").style.display = "none";
+    document.getElementById("result-text").textContent = "";
+    document.getElementById("question-container").style.display = "block";
+
+    // 顯示第一個問題
+    showNextQuestion();
+}
+</script>
+
+</body>
+</html>
